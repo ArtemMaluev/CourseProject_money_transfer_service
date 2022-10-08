@@ -1,5 +1,6 @@
 package maluevartem.moneytransferservice.repository;
 
+import maluevartem.moneytransferservice.dao.DatabaseCards;
 import maluevartem.moneytransferservice.model.MoneyTransfer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.Properties;
 public class CardRepositoryTest {
 
     private CardRepository cardRepository;
+    private DatabaseCards databaseCards;
     private MoneyTransfer moneyTransfer;
     private Properties properties;
     private String code;
@@ -23,6 +25,7 @@ public class CardRepositoryTest {
     public void init() {
         cardRepository = new CardRepository();
         properties = new Properties();
+        databaseCards = new DatabaseCards();
         try {
             properties.load(new FileInputStream("src/main/resources/application.properties"));
         } catch (IOException e) {
@@ -55,7 +58,7 @@ public class CardRepositoryTest {
     @Test
     public void test_confirmOperation() {
         assertAll("code",
-                () -> assertEquals(code, cardRepository.getConfirmationCode()));
+                () -> assertEquals(code, databaseCards.getConfirmationCode()));
     }
 
     @Test

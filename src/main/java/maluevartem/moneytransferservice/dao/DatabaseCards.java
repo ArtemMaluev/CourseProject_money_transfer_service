@@ -9,21 +9,29 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DatabaseCards {
+
+    private final String PATH = "src/main/resources/application.properties";
     private final Map<String, Card> listCards;
+    private final String confirmationCode;
 
     public DatabaseCards() {
         listCards = new ConcurrentHashMap<>();
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("src/main/resources/application.properties"));
+            properties.load(new FileInputStream(PATH));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         addCard(properties);
+        confirmationCode = properties.getProperty("CODE");
     }
 
     public Map<String, Card> getListCards() {
         return listCards;
+    }
+
+    public String getConfirmationCode() {
+        return confirmationCode;
     }
 
     private void addCard(Properties properties) {

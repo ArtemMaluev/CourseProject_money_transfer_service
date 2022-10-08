@@ -4,39 +4,25 @@ import maluevartem.moneytransferservice.model.MoneyTransfer;
 import maluevartem.moneytransferservice.model.Card;
 import maluevartem.moneytransferservice.dao.DatabaseCards;
 import maluevartem.moneytransferservice.logger.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class CardRepository {
 
     private final Logger logger = Logger.getLog();
-    private final Properties properties;
     private static AtomicLong operationId;
     private final DatabaseCards databaseCards;
     private final String confirmationCode;
 
+    @Autowired
     public CardRepository() {
         databaseCards = new DatabaseCards();
         logger.log("База данных карт пользователей загружена");
         operationId = new AtomicLong();
-
-        properties = new Properties();
-        try {
-            properties.load(new FileInputStream("src/main/resources/application.properties"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        confirmationCode = properties.getProperty("CODE");
-    }
-
-    public String getConfirmationCode() {
-        return confirmationCode;
+        confirmationCode = databaseCards.getConfirmationCode();
     }
 
     public String verificationCard(MoneyTransfer moneyTransfer) {

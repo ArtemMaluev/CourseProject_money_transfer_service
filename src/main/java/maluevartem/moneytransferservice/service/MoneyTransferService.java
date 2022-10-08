@@ -1,10 +1,12 @@
 package maluevartem.moneytransferservice.service;
 
+import lombok.experimental.Accessors;
 import maluevartem.moneytransferservice.model.MoneyTransfer;
 import maluevartem.moneytransferservice.exception.IncorrectDataEntry;
 import maluevartem.moneytransferservice.exception.DataMismatch;
 import maluevartem.moneytransferservice.logger.Logger;
 import maluevartem.moneytransferservice.repository.CardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +16,7 @@ public class MoneyTransferService {
     private final CardRepository cardRepository;
     private MoneyTransfer moneyTransfer;
 
+    @Autowired
     public MoneyTransferService(CardRepository customerRepository) {
         this.cardRepository = customerRepository;
     }

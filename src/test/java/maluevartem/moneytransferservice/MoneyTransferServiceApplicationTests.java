@@ -1,7 +1,6 @@
 package maluevartem.moneytransferservice;
 
 import maluevartem.moneytransferservice.model.MoneyTransfer;
-import maluevartem.moneytransferservice.repository.CardRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,37 +36,37 @@ class MoneyTransferServiceApplicationTests {
     private TestRestTemplate restTemplate;
 
     @Container
-    private final static GenericContainer<?> myApp = new GenericContainer<>("myapp:latest")
+    private final static GenericContainer<?> myApp = new GenericContainer<>("transfer_service_backend:latest")
             .withExposedPorts(PORT);
 
-//    @Test
-//    void moneyTransferTest() {
-//        MoneyTransfer request = new MoneyTransfer(
-//                properties.getProperty("CARD_NUMBER_1"),
-//                properties.getProperty("CARD_VALID_TILL_1"),
-//                properties.getProperty("CARD_CVV_1"),
-//                properties.getProperty("CARD_NUMBER_2"),
-//                Integer.parseInt(properties.getProperty("VALUE")),
-//                properties.getProperty("CURRENCY")
-//        );
-//
-//        ResponseEntity<String> forEntity = restTemplate.postForEntity(
-//                "http://localhost:" + myApp.getMappedPort(PORT) + "/transfer", request, String.class);
-//        System.out.println(forEntity.getBody());
-//        String expected = "operationId: 1 has been verified";
-//        String actual = forEntity.getBody();
-//        Assertions.assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    void confirmOperationTest() {
-//        String code = properties.getProperty("CODE");
-//
-//        ResponseEntity<String> forEntity = restTemplate.postForEntity(
-//                "http://localhost:" + myApp.getMappedPort(PORT) + "/confirmOperation", code, String.class);
-//        System.out.println(forEntity.getBody());
-//        String expected = "operationId: 1 has been verified";
-//        String actual = forEntity.getBody();
-//        Assertions.assertEquals(expected, actual);
-//    }
+    @Test
+    void moneyTransferTest() {
+        MoneyTransfer request = new MoneyTransfer(
+                properties.getProperty("CARD_NUMBER_1"),
+                properties.getProperty("CARD_VALID_TILL_1"),
+                properties.getProperty("CARD_CVV_1"),
+                properties.getProperty("CARD_NUMBER_2"),
+                Integer.parseInt(properties.getProperty("VALUE")),
+                properties.getProperty("CURRENCY")
+        );
+
+        ResponseEntity<String> forEntity = restTemplate.postForEntity(
+                "http://localhost:" + myApp.getMappedPort(PORT) + "/transfer", request, String.class);
+        System.out.println(forEntity.getBody());
+        String expected = "operationId: 1 has been verified";
+        String actual = forEntity.getBody();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void confirmOperationTest() {
+        String code = properties.getProperty("CODE");
+
+        ResponseEntity<String> forEntity = restTemplate.postForEntity(
+                "http://localhost:" + myApp.getMappedPort(PORT) + "/confirmOperation", code, String.class);
+        System.out.println(forEntity.getBody());
+        String expected = "operationId: 1 has been verified";
+        String actual = forEntity.getBody();
+        Assertions.assertEquals(expected, actual);
+    }
 }

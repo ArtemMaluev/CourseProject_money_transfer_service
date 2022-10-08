@@ -2,7 +2,6 @@ package maluevartem.moneytransferservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import maluevartem.moneytransferservice.model.MoneyTransfer;
-import maluevartem.moneytransferservice.repository.CardRepository;
 import maluevartem.moneytransferservice.service.MoneyTransferService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,6 @@ public class MoneyTransferControllerTest {
 
     @MockBean
     private MoneyTransferService moneyTransferService;
-
-    @MockBean
-    private CardRepository cardRepository;
 
     @Test
     public void test_postRequestTransfer() throws Exception {

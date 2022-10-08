@@ -3,6 +3,7 @@ package maluevartem.moneytransferservice.controller;
 import maluevartem.moneytransferservice.model.MoneyTransfer;
 import maluevartem.moneytransferservice.logger.Logger;
 import maluevartem.moneytransferservice.service.MoneyTransferService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +13,7 @@ public class MoneyTransferController {
     private final Logger logger = Logger.getLog();
     private final MoneyTransferService service;
 
+    @Autowired
     public MoneyTransferController(MoneyTransferService service) {
         this.service = service;
     }
