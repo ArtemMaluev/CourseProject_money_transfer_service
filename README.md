@@ -39,12 +39,12 @@ FRONT доступен по адресу https://github.com/serp-ya/card-transfe
 *****************
 ## Запуск
 ### Вариант 1 Dockerfile
-- Через терминал собираем jar архив с spring boot приложением: `./mvnw clean package `
-- Создаем образ из нашего Dockerfile, мы должны запустить: `docker build -t transfer_service:latest .  `
-- Запускаем контейнер из нашего образа: `docker run --rm -p 8080:8080 -it transfer_service:latest`
+- Через терминал собираем jar архив с spring boot приложением: `./mvn clean package `
+- Создаем образ из нашего Dockerfile, мы должны запустить: `docker build -t transfer_service_backend:latest .  `
+- Запускаем контейнер из нашего образа: `docker run --rm -p 8080:8080 -it transfer_service_backend:latest`
 
 ### Вариант 2 с помощью файла docker-compose.yml
-- Черезтерминал собираем jar архив с spring boot приложением: `./mvnw clean package`
+- Черезтерминал собираем jar архив с spring boot приложением: `./mvn clean package`
 - в терминале выполнить команду: `docker-compose up`
 
 ## Проверка
